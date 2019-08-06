@@ -1,5 +1,5 @@
 <template>
   <div>
-    myGit
+    myGit.s
   </div>
 </template>
