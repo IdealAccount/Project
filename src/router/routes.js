@@ -1,12 +1,12 @@
-import Services from '../components/header/NavMenuLinks/Services'
-import Studio from '../components/header/NavMenuLinks/Studio'
-import Team from '../components/header/NavMenuLinks/Team'
-import Portfolio from '../components/header/NavMenuLinks/Portfolio'
-import Blog from '../components/header/NavMenuLinks/Blog'
-import Reviews from '../components/header/NavMenuLinks/Reviews'
-import Contacts from '../components/header/NavMenuLinks/Contacts'
-import Home from '../components/header/NavMenuLinks/Home'
-import Seo from '../components/header/NavMenuLinks/NavSubMenu/Seo'
+import Services from '@/components/header/NavMenuLinks/Services'
+import Studio from '@/components/header/NavMenuLinks/Studio'
+import Team from '@/components/header/NavMenuLinks/Team'
+import Portfolio from '@/components/header/NavMenuLinks/Portfolio'
+import Blog from '@/components/header/NavMenuLinks/Blog'
+import Reviews from '@/components/header/NavMenuLinks/Reviews'
+import Contacts from '@/components/header/NavMenuLinks/Contacts'
+import Home from '@/components/header/NavMenuLinks/Home'
+import Seo from '@/components/header/NavMenuLinks/NavSubMenu/Seo'
 
 export const routes = [
   {
