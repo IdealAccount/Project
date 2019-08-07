@@ -1,39 +1,40 @@
 <template>
-    <section>
-      <p class="section-caption">У вас уже есть свой сайт. Замечательно,
-        половина пути пройдена! Но как сделать так,
-        чтобы ваша целевая аудитория нашла<br>
-        его и узнала о ваших товарах и услугах?
-        Всё просто – заказать SEO-продвижение в компании WEB ALTERNATIVE.</p>
-        <ul class="articles">
-          <li class="articles-item"
-              v-for="(article,i) in articles"
-              :key="article.id"
-              :style="article.bg"
-              :index = i
-              @mouseover="index = i"
-              @mouseleave="index = null"
+  <section>
+    <h3 class="section-caption">У вас уже есть свой сайт. Замечательно,
+      половина пути пройдена! Но как сделать так,
+      чтобы ваша целевая аудитория нашла
+      его и узнала о ваших товарах и услугах?
+      Всё просто – заказать SEO-продвижение в компании WEB ALTERNATIVE.</h3>
+    <ul class="articles" :style="bgParallaxPosition">
+      <li class="articles-item"
+          v-for="(article,i) in articles"
+          :key="article.id"
+          :style="article.bg"
+          :index=i
+          @mouseover="index = i"
+          @mouseleave="index = null"
+      >
+        <a class="articles-item-link"
+           :href="article.url"
+        >{{article.topic}}</a>
+        <transition name="fade">
+          <popup :key="article.id"
+                 v-show="index === i"
           >
-            <a class="articles-item-link"
-               :href="article.url"
-            >{{article.topic}}</a>
-            <transition name="fade">
-              <popup :key="article.id"
-                   v-show="index === i"
-              >
-              </popup>
-            </transition>
-          </li>
-        </ul>
-      <Advantages/>
-      <section-footer></section-footer>
-    </section>
+          </popup>
+        </transition>
+      </li>
+    </ul>
+    <Advantages/>
+    <section-footer></section-footer>
+  </section>
 </template>
 <script>
   import {mapState} from 'Vuex'
   import Advantages from './Advantages'
   import SectionFooter from './SectionFooter'
   import Popup from './Popup'
+
   export default {
     components: {
       Advantages,
@@ -43,21 +44,43 @@
     data() {
       return {
         show: false,
-        index: null
+        index: null,
+        bgSpeed: 0,
+        screenWidth: 0,
+      }
+    },
+    mounted() {
+      document.addEventListener('wheel', this.parallax);
+      window.addEventListener('resize', this.calcWidth)
+    },
+    methods: {
+      parallax() {
+        return this.bgSpeed = pageYOffset
+      },
+      calcWidth() {
+        return this.screenWidth = document.documentElement.clientWidth;
       }
     },
     computed: {
       ...mapState(['articles']),
+      bgParallaxPosition() {
+        if (document.documentElement.clientWidth >= 1024) return;
+        return `background-position: 0 ${this.bgSpeed / 10}px`
+      }
     },
+    beforeDestroy() {
+      document.removeEventListener('wheel', this.parallax);
+      window.removeEventListener('resize', this.calcWidth)
+    }
   }
 </script>
 <style lang="scss" scoped>
   section {
     padding-top: 40px;
   }
+
   .section-caption {
     padding: 0 20px;
-    text-align: justify;
     font-weight: 500;
     font-size: 20px;
     margin-bottom: 40px;
@@ -67,7 +90,13 @@
     flex-wrap: wrap;
     padding: 40px 10px;
     margin-bottom: 46px;
-    background: url('/static/img/bg_section1.jpg');
+    background: {
+      image: url('/static/img/bg_section1.jpg');
+      position: 0 0;
+      attachment: fixed;
+      size: cover;
+      repeat: revert;
+    }
     &-item {
       position: relative;
       width: 100%;
@@ -82,17 +111,14 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        border: 1px solid rgba(#fff,.5);
+        border: 1px solid rgba(#fff, .5);
         color: #fff;
         height: 100%;
         font-size: 20px;
       }
-
     }
-
   }
-
-  @media only screen  and (min-width: 640px) and (max-width: 1024px) {
+  @media only screen and (min-width: 640px) and (max-width: 1024px) {
     .articles {
       justify-content: space-between;
       padding-bottom: 0;
@@ -104,7 +130,8 @@
       }
     }
   }
-  @media only screen  and (min-width: 1024px) and (max-width: 1439px) {
+
+  @media only screen and (min-width: 1024px) and (max-width: 1439px) {
     .articles {
       flex-wrap: nowrap;
       background: none;
@@ -119,6 +146,13 @@
       font-size: 16px;
     }
   }
+
+  @media only screen and (min-width: 1200px) {
+    section {
+      padding-top: 99px;
+    }
+  }
+
   @media only screen and (min-width: 1440px) {
     .articles {
       flex-wrap: nowrap;
@@ -126,12 +160,10 @@
       padding: 0;
     }
   }
+
   @media only screen and (min-width: 1700px) {
     .container {
       max-width: 1180px;
-    }
-    section {
-      padding-top: 99px;
     }
     .section-caption {
       max-width: 1140px;
@@ -165,12 +197,13 @@
       opacity: 1;
     }
   }
+
   /*@media only screen and (min-width: 1440px) {*/
-    /*.articles-item-popup {*/
-      /*min-height: initial;*/
-      /*&__content p {*/
-        /*font-size: 13px;*/
-      /*}*/
-    /*}*/
+  /*.articles-item-popup {*/
+  /*min-height: initial;*/
+  /*&__content p {*/
+  /*font-size: 13px;*/
+  /*}*/
+  /*}*/
   /*}*/
 </style>

@@ -1,19 +1,19 @@
 <template>
-    <div class="content" >
-      <h1 class="content-title">Home</h1>
-      <div class="home-text">
-        <p>Изображение по которому верстал в папке.Ширина макета 1717px</p>
-        <hr>
-        <p @mouseover="bounce = true"
-           @mouseleave="bounce = false"
-        >Эта страница создана для примера,
-          нажмите <router-link to="/seo"
-                               @mouseover="bounce = true"
-                               :class="[{animate: bounce}, 'mark']"
-          >сюда</router-link>, чтобы начать
-        </p>
-      </div>
+  <div class="content">
+    <h1 class="content-title">Home</h1>
+    <div class="home-text">
+      <p>Изображение по которому верстал в папке.Ширина макета 1717px</p>
+      <hr>
+      <p @mouseover="bounce = true"
+         @mouseleave="bounce = false"
+      >Эта страница создана для примера,нажмите
+        <router-link to="/seo"
+                     @mouseover="bounce = true"
+                     :class="[{animate: bounce}, 'mark']"
+        >сюда</router-link>, чтобы начать
+      </p>
     </div>
+  </div>
 </template>
 <script>
   export default {

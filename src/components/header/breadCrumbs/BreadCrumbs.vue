@@ -41,7 +41,7 @@
         &:not(:last-child):after {
           color: #7e7e7e;
           content: '|';
-          padding: 0 5px;
+          padding: 0 4px;
         }
       }
       &-link {

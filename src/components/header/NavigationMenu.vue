@@ -1,5 +1,5 @@
 <template>
-  <div class="header-nav" ref="navBar">
+  <div class="header-nav" ref="navbar">
     <div class="container">
       <div class="flex">
         <router-link class="header-logo" to="home"></router-link>
@@ -19,12 +19,10 @@
             <li v-for="link of navigationMenu"
                 :key="link.title"
                 :class="['nav-menu-item', {'is-open': ( link.submenu ? index === link.id : false)}]"
-                @click="index = index === link.id ? null : link.id"
-            >
+                @click="index = index === link.id ? null : link.id">
               <router-link v-if="link.url" class="nav-menu-link"
                            :key="link.url"
-                           :to="link.url"
-              >
+                           :to="link.url">
                 {{link.title}}
               </router-link>
               <a v-else class="nav-menu-link" :key="index">{{link.title}}</a>
@@ -66,11 +64,11 @@
     },
     methods: {
       isScroll() {
-        this.$refs['navBar'].style.background = (pageYOffset > 50) ? 'rgb(57, 57, 57)' : ''
+        this.$refs.navbar.style.background = (pageYOffset > 50) ? 'rgb(57, 57, 57)' : ''
       },
       showMenu(e) {
-        let screenWidth = document.body.clientWidth;
-        if (screenWidth >= 978 && screenWidth < 1200) {
+        let screenWidth = document.documentElement.clientWidth;
+          if (screenWidth >= 978 && screenWidth < 1200) {
           if (e.keyCode === 27 || e.keyCode === 77) {
             this.active = false;
           }

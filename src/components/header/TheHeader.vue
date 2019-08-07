@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :style="parallaxBg">
     <nav-menu></nav-menu>
     <bread-crumbs></bread-crumbs>
     <header-content></header-content>
@@ -15,6 +15,22 @@
       'nav-menu': NavigationMenu,
       'bread-crumbs': BreadCrumbs,
       'header-content': HeaderContent
+    },
+    data() {
+      return {
+
+      }
+    },
+    mounted() {
+      document.addEventListener('mousemove', this.parallax)
+    },
+    methods: {
+
+    },
+    computed: {
+      parallaxBg() {
+       return  `background-position: ${this.mouseX}px ${this.mouseY}px`
+      }
     }
   }
 </script>
