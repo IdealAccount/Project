@@ -5,7 +5,7 @@
       чтобы ваша целевая аудитория нашла
       его и узнала о ваших товарах и услугах?
       Всё просто – заказать SEO-продвижение в компании WEB ALTERNATIVE.</h3>
-    <ul class="articles" :style="bgParallaxPosition">
+    <ul class="articles">
       <li class="articles-item"
           v-for="(article,i) in articles"
           :key="article.id"
@@ -45,32 +45,10 @@
       return {
         show: false,
         index: null,
-        bgSpeed: 0,
-        screenWidth: 0,
-      }
-    },
-    mounted() {
-      document.addEventListener('wheel', this.parallax);
-      window.addEventListener('resize', this.calcWidth)
-    },
-    methods: {
-      parallax() {
-        return this.bgSpeed = pageYOffset
-      },
-      calcWidth() {
-        return this.screenWidth = document.documentElement.clientWidth;
       }
     },
     computed: {
       ...mapState(['articles']),
-      bgParallaxPosition() {
-        if (document.documentElement.clientWidth >= 1024) return;
-        return `background-position: 0 ${this.bgSpeed / 10}px`
-      }
-    },
-    beforeDestroy() {
-      document.removeEventListener('wheel', this.parallax);
-      window.removeEventListener('resize', this.calcWidth)
     }
   }
 </script>
@@ -85,6 +63,7 @@
     font-size: 20px;
     margin-bottom: 40px;
   }
+
   .articles {
     display: flex;
     flex-wrap: wrap;
@@ -94,8 +73,8 @@
       image: url('/static/img/bg_section1.jpg');
       position: 0 0;
       attachment: fixed;
-      size: cover;
-      repeat: revert;
+      repeat: no-repeat;
+      /*size: 110%;*/
     }
     &-item {
       position: relative;
@@ -118,6 +97,7 @@
       }
     }
   }
+
   @media only screen and (min-width: 640px) and (max-width: 1024px) {
     .articles {
       justify-content: space-between;
@@ -139,7 +119,6 @@
         &:not(:last-child) {
           margin-bottom: 0;
         }
-
       }
     }
     .btn-more {
