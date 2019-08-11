@@ -6,7 +6,7 @@
         <a href="tel: (4212)25-30-85" class="header-phone">(4212)25-30-85</a>
         <div ref="burger"
              :class="[{'is-active': active}, 'burger']"
-             @click="active = !active && (index === !active)"
+             @click="active = !active"
         >
           <div class="burger-box">
             <div class="burger-inner"></div>
