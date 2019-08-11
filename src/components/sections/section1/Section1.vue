@@ -30,7 +30,7 @@
   </section>
 </template>
 <script>
-  import {mapState} from 'Vuex'
+  import {mapState} from 'vuex'
   import Advantages from './Advantages'
   import SectionFooter from './SectionFooter'
   import Popup from './Popup'

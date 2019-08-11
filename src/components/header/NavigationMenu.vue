@@ -6,7 +6,7 @@
         <a href="tel: (4212)25-30-85" class="header-phone">(4212)25-30-85</a>
         <div ref="burger"
              :class="[{'is-active': active}, 'burger']"
-             @click="active = !active && (index = !active)"
+             @click="active = !active && (index === !active)"
         >
           <div class="burger-box">
             <div class="burger-inner"></div>
@@ -27,7 +27,7 @@
               </router-link>
               <a v-else class="nav-menu-link" :key="index">{{link.title}}</a>
                 <transition name="slide-in" :key="index">
-                  <sub-menu v-if="link.submenu" :class="{'is-show': link.id === submenuIndex}"
+                  <sub-menu v-if="link.submenu" :class="{'is-show': link.id === index}"
                             :key="index"
                             :submenu="link.submenu"
                   ></sub-menu>
@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-  import {mapState} from 'Vuex'
+  import {mapState} from 'vuex'
   import SubMenu from './NavMenuLinks/NavSubMenu/SubMenu'
 
   export default {
@@ -90,9 +90,6 @@
     },
     computed: {
       ...mapState(['navigationMenu']),
-      submenuIndex() {
-        return this.index
-      }
     },
     beforeDestroy() {
       window.removeEventListener('scroll', this.isScroll);

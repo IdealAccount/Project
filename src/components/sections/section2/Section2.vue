@@ -15,7 +15,7 @@
   </section>
 </template>
 <script>
-  import {mapState} from 'Vuex'
+  import {mapState} from 'vuex'
   import Carousel from './Carousel'
   export default {
     components: {
